@@ -1,8 +1,18 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+
+    const router = useNavigate();
+
+    function routerToHomepage(){
+        router('/')
+    }
+
     return(
-        <div>Register</div>
+        <div>
+            <h2>Register</h2>
+            <button onClick={routerToHomepage}>Back to Homepage</button>
+        </div>
     )
 }
 
