@@ -1,0 +1,19 @@
+.active-button{
+    padding: 5% 10%;
+    background-color: green;
+    font-size: 2em;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    margin: 10% auto;
+}
+
+.inactive-button{
+    padding: 5% 10%;
+    background-color: gray;
+    font-size: 2em;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    margin: 10% auto;
+}

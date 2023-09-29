@@ -1,0 +1,41 @@
+.form-card{
+    border: 1px solid black;
+    border-radius: 2em;
+    box-shadow: 5px 5px 20px 5px;
+    width: 30%;
+    margin: 100px auto;
+    height: 400px;
+}
+
+.form-card input{
+    /* border: none; */
+    outline: none;
+    /* height: 3em; */
+    margin: 5% auto;
+}
+
+.form-card input[type='submit']{
+    height: 3em;
+    width: 20em;
+    border-radius: 1em;
+    background-color: lightblue;
+}
+
+/* .form-card input[name='password']{
+    border-color: red ;
+} */
+
+.gray-border{
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+.red-border{
+    border: none;
+    border-bottom: 1px solid red ; 
+}
+
+.green-border{
+    border: none;
+    border-bottom: 1px solid greenyellow ; 
+}

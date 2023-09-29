@@ -16,6 +16,9 @@ import MappingProps from './components/16-09/MappingProps';
 import StyledComponents from './components/16-09/StyledComponents';
 import Ternary from './components/16-09/Ternary';
 import { useState } from 'react';
+import DynamicStyles from './components/20-09/DynamicStyles';
+import ChildrenProp from './components/22-09/ChildrenProp';
+import Register2 from './components/22-09/Register2';
 
 function App() {
   const [loggedIn, setIsLoggedIn] = useState(false)
@@ -37,6 +40,9 @@ function App() {
         <Route exact path='/mappingprops' element={<MappingProps greeting={'Hi,'} names={['Swaraj','Amaan','Faez','Siddhi','Pratiksha']} />}/>
         <Route exact path='/styledcomponents' element={<StyledComponents/>} />
         <Route exact path='/ternary' element={<Ternary loggedIn={loggedIn} setIsLoggedIn={setIsLoggedIn}/>}/>
+        <Route exact path='/dynamicstyles' element={<DynamicStyles/>}/>
+        <Route exact path='/childrenprop' element={<ChildrenProp/>} />
+        <Route exact path='/register2' element={<Register2/>}/>
       </Routes>
     </div>
   );

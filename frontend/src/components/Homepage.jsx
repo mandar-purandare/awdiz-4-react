@@ -44,6 +44,10 @@ function Homepage() {
         router('/Ternary');
     }
 
+    function routerToDynamicStyles(){
+        router('/DynamicStyles');
+    }
+
     return (
         <div>
             <h1>Homepage for Awdiz</h1>
@@ -60,6 +64,7 @@ function Homepage() {
                 <button onClick={routerToMappingProps}>Names Using Map & Props</button>
                 <button onClick={routerToStyledComponents}>Styled Components</button>
                 <button onClick={routerToTernary}>Ternary For Login</button>
+                <button onClick={routerToDynamicStyles}>Dynamic Styles</button>
             </div>
         </div>
     )
