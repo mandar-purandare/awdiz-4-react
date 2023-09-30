@@ -21,6 +21,8 @@ import ChildrenProp from './components/22-09/ChildrenProp';
 import Register2 from './components/22-09/Register2';
 import { ClassComponent } from './components/29-09/ClassComponent';
 import PageNotFound from './components/29-09/PageNotFound';
+import Product from './components/30-09/Product';
+import Login2 from './components/30-09/Login2';
 
 function App() {
   const [loggedIn, setIsLoggedIn] = useState(false)
@@ -47,6 +49,8 @@ function App() {
         <Route exact path='/register2' element={<Register2/>}/>
         <Route exact path='/classcomponent' element={<ClassComponent/>}/>
         <Route exact path='*' element={<PageNotFound/>}/>
+        <Route exact path='/product' element={<Product/>}/>
+        <Route exact path='/login2' element={<Login2/>}/>
       </Routes>
     </div>
   );
