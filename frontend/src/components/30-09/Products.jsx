@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import toast from "react-hot-toast";
+import './Products.css';
+import { useNavigate } from "react-router-dom";
 
-function Product(){
+function Products(){
     const [products, setProducts] = useState([]);
+    const router = useNavigate();
 
     useEffect(() => {
         async function getProducts(){
@@ -18,14 +21,14 @@ function Product(){
     },[]);
 
     return(
-        <div>{products.length?
-            <div style={{display:"flex", flexWrap:"wrap", justifyContent:"space-around"}}>
+        <div className="products-container">{products.length?
+            <div className="products-row">
                 {products.map((pro) => (
-                    <div style={{ border: "1px solid black", width: "23%", height: "550px", marginBottom: "10px" }}>
-                        <img style={{ width: "80%", height: "300px", marginTop:"10%" }} src={pro.image} />
+                    <div className="product-template" onClick={() => {router(`/product/${pro.id}`)}}>
+                        <img src={pro.image} />
                         <h3>Name :{pro.title}</h3>
                         <h3>Price : {pro.price} $</h3>
-                        <button style={{border: "1px solid transparent", backgroundColor:"lightgreen", }}>Add to cart</button>
+                        <button>View</button>
                     </div>
                 ))}
             </div>
@@ -36,5 +39,5 @@ function Product(){
 
 }
 
-export default Product;
+export default Products;
 

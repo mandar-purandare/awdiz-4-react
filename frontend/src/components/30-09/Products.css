@@ -1,0 +1,32 @@
+.products-container{
+    background-color: lightgrey;
+}
+.products-row{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.product-template{
+   border: 1px solid black;
+   border-radius: 1em;
+   width: 23%; 
+   height: 550px; 
+   margin-bottom: 5%;
+   background-color: white;
+}
+
+.product-template img{
+    width: 80%; 
+    height: 300px; 
+    margin-top: 10%;
+}
+
+.product-template button{
+    border: 1px solid transparent; 
+    background-color:lightgreen;
+}
+
+.product-template button:hover{
+    cursor: pointer;
+}

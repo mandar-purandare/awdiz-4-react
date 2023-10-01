@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './../22-09/Register2.css';
+import toast, {Toaster} from 'react-hot-toast';
 
 const Login2 = () => {
   const [userData, setUserData] = useState({email: "", password: "" });
@@ -28,21 +29,24 @@ const Login2 = () => {
     event.preventDefault();
     if(userData.email && userData.password){
       if(userData.password.length >= 8){
-          const response = {data : {success:true}};
+          let response = {data : {success:true}};
           if(response.data.success){
-            alert('Login successfull');
-            setUserData({email:"", password:""})
-            router('/');
+            // alert('Login successfull');
+            toast.success('Login successfull');
+            setUserData({email:"", password:""});
+            setTimeout(() => {router('/');}, 1000)
           }else{
             response = {data: {error:'Login unsuccessfull'}}
             alert(response.data.error);
           }
       }else{
-        alert('Password must have minimum 8 characters');
+        // alert('Password must have minimum 8 characters');
+        toast.error("Password must have minimum 8 characters");
       }
       
     }else{
-      alert('All fields are mandatory!');
+      // alert('All fields are mandatory!');
+      toast.error('All fields are mandatory!');
     }
   }
 
@@ -60,6 +64,7 @@ const Login2 = () => {
         <br />
         <input type='submit' /><br />
       </form>
+      <Toaster/>
     </div>
   )
 }
