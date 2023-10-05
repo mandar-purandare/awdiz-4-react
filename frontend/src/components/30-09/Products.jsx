@@ -13,6 +13,7 @@ function Products(){
             try{
                 const { data } = await axios.get('https://fakestoreapi.com/products');
                 setProducts(data);
+                // console.log(products);
             }catch(error){
                 toast.error(error.message)
             }

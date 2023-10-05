@@ -24,6 +24,7 @@ import PageNotFound from './components/29-09/PageNotFound';
 import Products from './components/30-09/Products';
 import Product from './components/01-10/Product';
 import Login2 from './components/30-09/Login2';
+import AddProduct from './components/04-10/AddProduct';
 
 function App() {
   const [loggedIn, setIsLoggedIn] = useState(false)
@@ -53,6 +54,7 @@ function App() {
         <Route exact path='/products' element={<Products/>}/>
         <Route exact path='/product/:id' element={<Product/>}/>
         <Route exact path='/login2' element={<Login2/>}/>
+        <Route exact path='/addproduct' element={<AddProduct/>}/>
       </Routes>
     </div>
   );
