@@ -1,8 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { MyContext } from "./Context/GlobalContext";
 
 function Homepage() {
 
     const router = useNavigate();
+
+    const {state, dispatch} = useContext(MyContext);
 
     function routerToLogin(){
         router('/login');
@@ -65,6 +69,12 @@ function Homepage() {
                 <button onClick={routerToStyledComponents}>Styled Components</button>
                 <button onClick={routerToTernary}>Ternary For Login</button>
                 <button onClick={routerToDynamicStyles}>Dynamic Styles</button>
+            </div>
+            <div>
+                <h2> Global counter: {state.counter}</h2>
+                <button onClick={() => dispatch({type:'INCREMENT'})}>+</button>
+                <button onClick={() => dispatch({type:'DECREMENT'})}>-</button>
+                <button onClick={() =>dispatch({type:'RESET'})}>Reset</button>
             </div>
         </div>
     )

@@ -29,7 +29,6 @@ import UseMemo from './components/06-10/UseMemo';
 import UseCallback from './components/07-10/UseCallback';
 import UseReducer from './components/08-10/UseReducer';
 import TestReducer from './components/08-10/TestReducer';
-import GlobalContext from './components/Context/GlobalContext';
 
 function App() {
   const [loggedIn, setIsLoggedIn] = useState(false)
@@ -64,7 +63,6 @@ function App() {
         <Route exact path='/usecallback' element={<UseCallback/>}/>
         <Route exact path='/usereducer' element={<UseReducer/>}/>
         <Route exact path='/testreducer' element={<TestReducer/>}/>
-        <Route exact path='/globalcontext' element={<GlobalContext/>}/>
       </Routes>
     </div>
   );
