@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import './Products.css';
 import { useNavigate } from "react-router-dom";
+import api from "../../helpers/AxiosConfig";
 
 function Products(){
     const [products, setProducts] = useState([]);
@@ -11,11 +12,15 @@ function Products(){
     useEffect(() => {
         async function getProducts(){
             try{
-                const { data } = await axios.get('https://fakestoreapi.com/products');
-                setProducts(data);
+                // const { data } = await axios.get('https://fakestoreapi.com/products');
+                const {data} = await api.get('/product/get-all-products');
+                if(data.success){
+                    setProducts(data.products);
+                }
+                
                 // console.log(products);
             }catch(error){
-                toast.error(error.message)
+                toast.error(error.message);
             }
         }
         getProducts();
@@ -27,14 +32,15 @@ function Products(){
                 {products.map((pro) => (
                     <div className="product-template" onClick={() => {router(`/product/${pro.id}`)}}>
                         <img src={pro.image} />
-                        <h3>Name :{pro.title}</h3>
-                        <h3>Price : {pro.price} $</h3>
+                        <h3>Name :{pro.name}</h3>
+                        <h3>Price : ₹{pro.price} </h3>
+                        <h3>Category : {pro.category}</h3>
                         <button>View</button>
                     </div>
                 ))}
             </div>
             :<div>Loading...</div>
-        }</div>
+        }<Toaster/></div>
     )
     
 

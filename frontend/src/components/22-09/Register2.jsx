@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './Register2.css';
+import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
+import api from '../../helpers/AxiosConfig';
 
 const Register2 = () => {
   const [userData, setUserData] = useState({ name: "", email: "", password: "" });
@@ -28,21 +31,31 @@ const Register2 = () => {
     event.preventDefault();
     if(userData.name && userData.email && userData.password){
       if(userData.password.length >= 8){
-          const response = {data : {success:true}};
-          if(response.data.success){
-            alert('Registration successfull');
-            setUserData({name:"", email:"", password:""})
-            router('/');
-          }else{
-            response = {data: {error:'Registration failed'}}
-            alert(response.data.error);
+          // const response = {data : {success:true}};
+          try{
+                const response = await api.post('/auth/register',{userData});
+                // alert(response); return;
+                if(response.data.success){
+                  toast.success('Registration successfull');
+                  setUserData({name:"", email:"", password:""});
+                  setTimeout(() => {
+                    router('/');
+                  },1000);
+                }else{
+                  // response = {data: {error:'Registration failed'}}
+                  toast.error(response.error.message);
+                }
+          }catch(error){
+             toast.error(error.message);
+            // console.log(error);
           }
+          
       }else{
-        alert('Password must have minimum 8 characters');
+        toast.error('Password must have minimum 8 characters');
       }
       
     }else{
-      alert('All fields are mandatory!');
+      toast.error('All fields are mandatory!');
     }
   }
 
@@ -62,6 +75,7 @@ const Register2 = () => {
         <br />
         <input type='submit' /><br />
       </form>
+      <Toaster/>
     </div>
   )
 }
