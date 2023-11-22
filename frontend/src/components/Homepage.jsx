@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { MyContext } from "./Context/GlobalContext";
+import { AuthContext } from "./Context/AuthContext";
 
 function Homepage() {
 
     const router = useNavigate();
 
-    const {state, dispatch} = useContext(MyContext);
+    // const {state, dispatch} = useContext(MyContext);
+    const {state} = useContext(AuthContext);
 
     function routerToLogin(){
         router('/login');
@@ -55,6 +57,8 @@ function Homepage() {
     return (
         <div>
             <h1>Homepage for Awdiz</h1>
+            {state?.user?.name? <h2>Welcome, {state?.user?.name} </h2>:<h2></h2>}
+            
             <div>
                 <button onClick={routerToLogin}>Go to Login</button>
                 <button onClick={routerToRegister}>Go to Register</button>
@@ -71,10 +75,10 @@ function Homepage() {
                 <button onClick={routerToDynamicStyles}>Dynamic Styles</button>
             </div>
             <div>
-                <h2> Global counter: {state.counter}</h2>
+                {/* <h2> Global counter: {state.counter}</h2>
                 <button onClick={() => dispatch({type:'INCREMENT'})}>+</button>
                 <button onClick={() => dispatch({type:'DECREMENT'})}>-</button>
-                <button onClick={() =>dispatch({type:'RESET'})}>Reset</button>
+                <button onClick={() =>dispatch({type:'RESET'})}>Reset</button> */}
             </div>
         </div>
     )

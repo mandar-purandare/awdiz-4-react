@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './../22-09/Register2.css';
 import toast, {Toaster} from 'react-hot-toast';
+import api from '../../helpers/AxiosConfig';
+import { AuthContext } from '../Context/AuthContext';
 
 const Login2 = () => {
   const [userData, setUserData] = useState({email: "", password: "" });
@@ -9,6 +11,8 @@ const Login2 = () => {
   const [borderClass, setBorderClass] = useState('gray-border');
 
   const router = useNavigate();
+
+  const {Login, state} = useContext(AuthContext);
 
   const handleChange = (event) => {
     
@@ -29,11 +33,14 @@ const Login2 = () => {
     event.preventDefault();
     if(userData.email && userData.password){
       if(userData.password.length >= 8){
-          let response = {data : {success:true}};
+          // let response = {data : {success:true}};
+             const response = await api.post('auth/login',{email:userData.email, password:userData.password});
           if(response.data.success){
             // alert('Login successfull');
             toast.success('Login successfull');
             setUserData({email:"", password:""});
+            Login(response.data.user);
+            localStorage.setItem("token", response.data.token);
             setTimeout(() => {router('/');}, 1000)
           }else{
             response = {data: {error:'Login unsuccessfull'}}
