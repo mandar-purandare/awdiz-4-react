@@ -40,7 +40,7 @@ const Login2 = () => {
             toast.success('Login successfull');
             setUserData({email:"", password:""});
             Login(response.data.user);
-            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("my-token", JSON.stringify(response.data.token));
             setTimeout(() => {router('/');}, 1000)
           }else{
             response = {data: {error:'Login unsuccessfull'}}

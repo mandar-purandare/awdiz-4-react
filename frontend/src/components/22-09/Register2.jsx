@@ -39,7 +39,7 @@ const Register2 = () => {
                   toast.success('Registration successfull');
                   setUserData({name:"", email:"", password:""});
                   setTimeout(() => {
-                    router('/');
+                    router('/login2');
                   },1000);
                 }else{
                   // response = {data: {error:'Registration failed'}}
