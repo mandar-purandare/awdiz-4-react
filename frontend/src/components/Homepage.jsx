@@ -81,7 +81,7 @@ function Homepage() {
                 <button onClick={() =>dispatch({type:'RESET'})}>Reset</button> */}
             </div>
             <div>
-                <button onClick={Logout}>Logout</button>
+               {state?.user?.name? <button onClick={Logout}>Logout</button>:<></>} 
             </div>
         </div>
     )

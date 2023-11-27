@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Homepage from './components/Homepage';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -15,7 +15,7 @@ import MessagingCounter from './components/16-09/MessagingCounter';
 import MappingProps from './components/16-09/MappingProps';
 import StyledComponents from './components/16-09/StyledComponents';
 import Ternary from './components/16-09/Ternary';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import DynamicStyles from './components/20-09/DynamicStyles';
 import ChildrenProp from './components/22-09/ChildrenProp';
 import Register2 from './components/22-09/Register2';
@@ -31,11 +31,36 @@ import UseReducer from './components/08-10/UseReducer';
 import TestReducer from './components/08-10/TestReducer';
 import CustomHook from './components/13-10/CustomHook';
 import CustomHookLS from './components/13-10/CustomHookLS';
+import YourProducts from './components/YourProducts';
+import { AuthContext } from './components/Context/AuthContext';
 
 function App() {
-  const [loggedIn, setIsLoggedIn] = useState(false)
+  const [loggedIn, setIsLoggedIn] = useState(false);
+  const {state , Login, Logout} = useContext(AuthContext);
+  const router = useNavigate();
+
+  function goTo(route){
+    router('/'+ route);
+  }
   return (
     <div className="App">
+      <nav>
+          <div onClick={()=>{goTo('')}}>Home</div>
+          <div onClick={()=>{goTo('products')}}>All Products</div>
+          {state?.user?.name?
+          <>
+            <div onClick={()=>{goTo('addproduct')}}>Add Products</div>
+            <div onClick={()=>{goTo('your-products')}}>My Products</div>
+            <div>Cart</div>
+            
+          </> 
+          :<></>}
+          {state?.user?.name?
+          <></>:<>
+                  <div onClick={()=>{goTo('register2')}}>Register</div>
+                  <div onClick={()=>{goTo('login2')}}>Login</div>
+          </>}
+      </nav>
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route exact path='/login' element={<Login />} />
@@ -67,6 +92,7 @@ function App() {
         <Route exact path='/testreducer' element={<TestReducer/>}/>
         <Route exact path='/customhook' element={<CustomHook/>}/>
         <Route exact path='/customhookLS' element={<CustomHookLS/>}/>
+        <Route exact path='/your-products' element={<YourProducts/>}/>
       </Routes>
     </div>
   );
