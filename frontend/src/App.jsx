@@ -33,6 +33,7 @@ import CustomHook from './components/13-10/CustomHook';
 import CustomHookLS from './components/13-10/CustomHookLS';
 import YourProducts from './components/YourProducts';
 import { AuthContext } from './components/Context/AuthContext';
+import UpdateProduct from './components/UpdateProduct';
 
 function App() {
   const [loggedIn, setIsLoggedIn] = useState(false);
@@ -49,7 +50,7 @@ function App() {
           <div onClick={()=>{goTo('products')}}>All Products</div>
           {state?.user?.name?
           <>
-            <div onClick={()=>{goTo('addproduct')}}>Add Products</div>
+            <div onClick={()=>{goTo('add-product')}}>Add Products</div>
             <div onClick={()=>{goTo('your-products')}}>My Products</div>
             <div>Cart</div>
             
@@ -85,7 +86,7 @@ function App() {
         <Route exact path='/products' element={<Products/>}/>
         <Route exact path='/product/:id' element={<Product/>}/>
         <Route exact path='/login2' element={<Login2/>}/>
-        <Route exact path='/addproduct' element={<AddProduct/>}/>
+        <Route exact path='/add-product' element={<AddProduct/>}/>
         <Route exact path='/usememo' element={<UseMemo/>}/>
         <Route exact path='/usecallback' element={<UseCallback/>}/>
         <Route exact path='/usereducer' element={<UseReducer/>}/>
@@ -93,6 +94,7 @@ function App() {
         <Route exact path='/customhook' element={<CustomHook/>}/>
         <Route exact path='/customhookLS' element={<CustomHookLS/>}/>
         <Route exact path='/your-products' element={<YourProducts/>}/>
+        <Route exact path='/update-product/:id' element={<UpdateProduct/>}/>
       </Routes>
     </div>
   );

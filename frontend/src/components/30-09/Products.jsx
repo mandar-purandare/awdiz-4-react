@@ -30,7 +30,7 @@ function Products(){
         <div className="products-container">{products.length?
             <div className="products-row">
                 {products.map((pro) => (
-                    <div className="product-template" onClick={() => {router(`/product/${pro.id}`)}}>
+                    <div className="product-template" onClick={() => {router(`/product/${pro._id}`)}}>
                         <img src={pro.image} />
                         <h3>Name :{pro.name}</h3>
                         <h3>Price : ₹{pro.price} </h3>

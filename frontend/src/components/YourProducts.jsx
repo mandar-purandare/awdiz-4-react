@@ -22,6 +22,7 @@ function YourProducts() {
         }
     }
 
+
     useEffect(() => {
         if(state?.user?.name === undefined){
             toast.error('Please login to access this page');
@@ -30,8 +31,9 @@ function YourProducts() {
             },3000)
         }
 
-        if(state?.user && state?.user?.name !== undefined){
+        if(state){
             getYourProducts();
+            // console.log(state);
         }
     },[state]);
 
@@ -40,12 +42,13 @@ function YourProducts() {
          {yourProducts.length?
             <div className="products-row">
                 {yourProducts.map((pro) => (
-                    <div className="product-template" onClick={() => {router(`/product/${pro.id}`)}}>
+                    <div className="product-template">
                         <img src={pro.image} />
                         <h3>Name :{pro.name}</h3>
                         <h3>Price : ₹{pro.price} </h3>
                         <h3>Category : {pro.category}</h3>
-                        <button>View</button>
+                        <button onClick={() => {router(`/product/${pro._id}`)}}>View</button>
+                        <div><button onClick={() => {router(`/update-product/${pro._id}`)}}>Update?</button><span>  </span><button>Delete?</button></div>
                     </div>
                 ))}
             </div>

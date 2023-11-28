@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import './Product.css'
 import toast from 'react-hot-toast';
+import api from '../../helpers/AxiosConfig';
 
 function Product() {
     const {id} = useParams();
@@ -12,12 +13,12 @@ function Product() {
     useEffect(() => {
         async function getProductDetails(){
             try{
-                const { data } = await axios.get(`https://fakestoreapi.com/products/${id}`);
-                // console.log(data);
-                setProduct(data);
-                console.log(product);
+                const { data } = await api.get(`/product/get-single-product?id=${id}`);
+                if(data.success){
+                    setProduct(data.product);
+                }
             }catch(error){
-                toast.error(error.message);
+                toast.error(error.response.data.message);
             }
             
         }
@@ -36,7 +37,7 @@ function Product() {
             <img src={product.image}/>
         </div>
         <div className='product-info-div black-border'>
-            <h2>{product.title}</h2>
+            <h2>{product.name}</h2>
             {/* <h4 className='product-rating'>Rating ({product.rating.count}) : <span>{product.rating.rate}</span></h4> */}
             {/* <h4 className='product-rating'>Rating ({productRatingCount}) : <span>{productRating}</span></h4> */}
             <br/>
@@ -45,7 +46,7 @@ function Product() {
                 <button className='add-to-cart-btn'>Add to cart</button>
             </div>
             <br/>
-            <h4>{product.description}</h4>
+            <h4>{product.category}</h4>
             <button className='back-button' onClick={backToProducts}>Back to products</button>
         </div>
     </div>
