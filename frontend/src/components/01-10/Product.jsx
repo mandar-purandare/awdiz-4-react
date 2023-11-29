@@ -1,14 +1,31 @@
 import axios from 'axios';
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import './Product.css'
 import toast from 'react-hot-toast';
 import api from '../../helpers/AxiosConfig';
+import { AuthContext } from '../Context/AuthContext';
 
 function Product() {
     const {id} = useParams();
     const [product, setProduct] = useState([]);
     const router = useNavigate();
+    const { state } = useContext(AuthContext);
+
+    const addToCart = async (id) => {
+        if (state.user.id && id) {
+            try {
+                const response = await api.post("/user/add-to-cart", { userId: state.user.id, productId: id })
+                if (response.data.success) {
+                    toast.success(response.data.message)
+                }
+            } catch (error) {
+                toast.error(error.message);
+            }
+        } else {
+            toast.error("Please login to add product to cart.")
+        }
+    }
 
     useEffect(() => {
         async function getProductDetails(){
@@ -43,7 +60,7 @@ function Product() {
             <br/>
             <div>
                 <h2>${product.price}</h2>
-                <button className='add-to-cart-btn'>Add to cart</button>
+                <button className='add-to-cart-btn' onClick={() => {addToCart(id)}}>Add to cart</button>
             </div>
             <br/>
             <h4>{product.category}</h4>

@@ -34,6 +34,7 @@ import CustomHookLS from './components/13-10/CustomHookLS';
 import YourProducts from './components/YourProducts';
 import { AuthContext } from './components/Context/AuthContext';
 import UpdateProduct from './components/UpdateProduct';
+import Cart from './components/Cart';
 
 function App() {
   const [loggedIn, setIsLoggedIn] = useState(false);
@@ -52,7 +53,7 @@ function App() {
           <>
             <div onClick={()=>{goTo('add-product')}}>Add Products</div>
             <div onClick={()=>{goTo('your-products')}}>My Products</div>
-            <div>Cart</div>
+            <div onClick={()=>{goTo('cart')}}>Cart</div>
             
           </> 
           :<></>}
@@ -95,6 +96,7 @@ function App() {
         <Route exact path='/customhookLS' element={<CustomHookLS/>}/>
         <Route exact path='/your-products' element={<YourProducts/>}/>
         <Route exact path='/update-product/:id' element={<UpdateProduct/>}/>
+        <Route exact path='/cart' element={<Cart/>}/>
       </Routes>
     </div>
   );

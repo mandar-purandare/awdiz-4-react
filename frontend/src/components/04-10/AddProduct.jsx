@@ -24,8 +24,11 @@ function AddProduct() {
             try{
                 // const { data } = await axios.post('https://fakestoreapi.com/products',{name:product.name, price:product.price, image:product.image});
                 const { data } = await api.post('/product/add-product',{name:product.name, price:product.price, category:product.category, image:product.image, id: state?.user?.id});
-                toast.success('Product added successfully with id ' + data.id);
-                setProduct({ name: '', price: '', category:'',image: '' })
+                if(data.success){
+                    toast.success('Product added successfully with id ' + state?.user?.id);
+                    setProduct({ name: '', price: '', category:'',image: '' });
+                }
+                
             }
             catch(error){
                 console.log(error)

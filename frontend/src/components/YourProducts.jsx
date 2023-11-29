@@ -22,16 +22,28 @@ function YourProducts() {
         }
     }
 
+    const deleteProduct = async (id) => {
+        try{
+            const response = await api.delete('/product/delete-product', {params: {id}})
+            if(response.data.success){
+                getYourProducts();
+                toast.success('Product deleted successfully');
+            }
+        }catch(error){
+            toast.error(error?.response.data.message);
+        }
+    }
+
 
     useEffect(() => {
-        if(state?.user?.name === undefined){
+        if(state?.user && state?.user?.name === undefined){
             toast.error('Please login to access this page');
             setTimeout(() => {
                 router('/login2');
             },3000)
         }
 
-        if(state){
+        if(state?.user && state?.user?.name !== undefined){
             getYourProducts();
             // console.log(state);
         }
@@ -48,7 +60,11 @@ function YourProducts() {
                         <h3>Price : ₹{pro.price} </h3>
                         <h3>Category : {pro.category}</h3>
                         <button onClick={() => {router(`/product/${pro._id}`)}}>View</button>
-                        <div><button onClick={() => {router(`/update-product/${pro._id}`)}}>Update?</button><span>  </span><button>Delete?</button></div>
+                        <div>
+                            <button onClick={() => {router(`/update-product/${pro._id}`)}}>Update?</button>
+                            <span>  </span>
+                            <button onClick={() => {deleteProduct(pro._id)}}>Delete?</button>
+                        </div>
                     </div>
                 ))}
             </div>
