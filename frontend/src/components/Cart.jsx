@@ -15,7 +15,7 @@ const Cart = () => {
             const response = await api.get(`/user/cart?id=${state?.user?.id}`);
             if(response.data.success){
                 let products = response.data.products;
-                console.log(products);
+                // console.log(products);
                 setCartProducts(products)
                 
                
@@ -26,6 +26,19 @@ const Cart = () => {
             toast.error(error.message);
         }
         
+    }
+
+    async function deleteFromCart(productId,userId){
+        try{
+                const ids = {productId, userId}
+                const response = await api.delete(`/user/delete-from-cart`, {data: ids});
+                if(response.data.success){
+                    getYourCartProducts();
+                    toast.success(response.data.message);
+                }
+        }catch(error){
+            toast.error(error.response.data.message)
+        }
     }
 
     useEffect(() => {
@@ -48,12 +61,13 @@ const Cart = () => {
             {cartProducts.length?
             <div className="products-row">
                 {cartProducts.map((pro) => (
-                    <div className="product-template" onClick={() => {router(`/product/${pro._id}`)}}>
+                    <div className="product-template">
                         <img src={pro.image} />
                         <h3>Name :{pro.name}</h3>
                         <h3>Price : ₹{pro.price} </h3>
                         <h3>Category : {pro.category}</h3>
-                        <button>View</button>
+                        <button onClick={() => {router(`/product/${pro._id}`)}}>View</button><span> </span>
+                        <button onClick={() => {deleteFromCart(pro._id, state.user.id)}}>Remove</button>
                     </div>
                 ))}
             </div>
